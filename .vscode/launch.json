@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "EurekaServerApplication",
+            "request": "launch",
+            "mainClass": "com.eureka_server.EurekaServerApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "EmployeeApplication",
+            "request": "launch",
+            "mainClass": "com.employee.EmployeeApplication",
+            "projectName": "EMPLOYEE"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AddressApplication<ADDRESS>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.address.AddressApplication",
+            "projectName": "ADDRESS",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
