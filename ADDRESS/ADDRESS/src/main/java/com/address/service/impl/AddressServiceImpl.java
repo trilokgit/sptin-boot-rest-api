@@ -41,7 +41,7 @@ public class AddressServiceImpl implements AddressService {
 
         EmployeeDto employeeDto = employeeClient.getSingleEmployee(addressRequest.getEmpId());
         if (employeeDto == null) {
-            throw new ResourceNotFoundException("Employee not found for id: " + addressRequest.getEmpId());
+            throw new ResourceNotFoundException("Employee not found for id : " + addressRequest.getEmpId());
        }
             
         List<Address> listToSave = this.saveOrUpdateAddress(addressRequest);
