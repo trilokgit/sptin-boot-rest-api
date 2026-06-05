@@ -1,5 +1,6 @@
 package com.employee.exception;
 
+import com.address.exception.CustomException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,5 +24,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBadRequestException(MissingParameterException ex){
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(),ex.getStatus());
         return new ResponseEntity<>(errorResponse, ex.getStatus());
+    }
+
+    @ExceptionHandler(com.address.exception.CustomException.class)
+    public ResponseEntity<com.address.exception.ErrorResponse> handleCustomException(CustomException ex){
+        com.address.exception.ErrorResponse errorResponse = new com.address.exception.ErrorResponse(ex.getMessage(),ex.getStatus());
+        return ResponseEntity.status(ex.getStatus()).body(errorResponse);
     }
 }

@@ -99,6 +99,15 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public List<AddressDto> getAddressByEmpId(Long empId) {
+        List<Address> addressByEmpId = addressRepository.findAllByEmpId(empId);
+        if(addressByEmpId.isEmpty()){
+            throw new ResourceNotFoundException("No address found for employee id: " + empId);
+        }
+        return addressByEmpId.stream().map(address -> modelMapper.map(address, AddressDto.class)).toList();
+    }
+
+    @Override
     public void deleteAddress(Long id) {
 
         if (!addressRepository.existsById(id)) {

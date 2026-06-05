@@ -30,7 +30,7 @@ public class EmployeeController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDto saveEmployee(@RequestBody EmployeeDto employeeDto) {
+    public EmployeeDto saveEmployee(@RequestBody EmplfoyeeDto employeeDto) {
         return employeeService.saveEmployee(employeeDto);
     }
 
