@@ -38,17 +38,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDto> saveAddress(AddressRequest addressRequest) {
-
-        EmployeeDto employeeDto = employeeClient.getSingleEmployee(addressRequest.getEmpId());
-        if (employeeDto == null) {
-            throw new ResourceNotFoundException("Employee not found for id : " + addressRequest.getEmpId());
-       }
-            
+        employeeClient.getSingleEmployee(addressRequest.getEmpId());
         List<Address> listToSave = this.saveOrUpdateAddress(addressRequest);
-        
-        
         List<Address> savedAddresses = addressRepository.saveAll(listToSave);
-
         return savedAddresses.stream()
                 .map(savedAddress -> modelMapper.map(savedAddress, AddressDto.class))
                 .toList();
@@ -56,6 +48,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDto> updateAddress(AddressRequest addressRequest) {
+
+        employeeClient.getSingleEmployee(addressRequest.getEmpId());
 
         List<Address> addressesByEmpId = addressRepository.findAllByEmpId(addressRequest.getEmpId());
         if (addressesByEmpId.isEmpty()) {
