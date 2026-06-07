@@ -22,7 +22,7 @@ public class UserService {
                 savedUser.getId(),
                 savedUser.getUsername(),
                 savedUser.getEmail(),
-                savedUser.getRole()
+                savedUser.getRoles()
         );
     }
 }
