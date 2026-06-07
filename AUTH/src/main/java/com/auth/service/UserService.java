@@ -1,8 +1,10 @@
 package com.auth.service;
 
+import com.auth.model.JwtTokenResponse;
 import com.auth.model.User;
 import com.auth.model.UserDto;
 import com.auth.repository.UserRepository;
+import com.auth.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public UserDto saveUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -24,5 +27,15 @@ public class UserService {
                 savedUser.getEmail(),
                 savedUser.getRoles()
         );
+    }
+
+    public JwtTokenResponse generateToken(String username){
+        String token = jwtUtil.generateToken(username);
+        JwtTokenResponse jwtTokenResponse = new JwtTokenResponse();
+        jwtTokenResponse.setToken(token);
+        jwtTokenResponse.setType("Bearer");
+        jwtTokenResponse.setValidUntil(jwtUtil.getExpirationDate(token).toString());
+        return jwtTokenResponse;
+
     }
 }
